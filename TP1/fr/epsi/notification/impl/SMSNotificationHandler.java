@@ -1,22 +1,24 @@
 package fr.epsi.notification.impl;
 
-import fr.epsi.notification.ISMSNotificationHandler;
 import fr.epsi.notification.NotificationException;
 import fr.epsi.user.User;
+import org.apache.commons.lang.StringUtils;
 
-import java.util.Optional;
+public class SMSNotificationHandler extends AbstractNotificationHandler {
 
-public class SMSNotificationHandler extends AbstractNotificationHandler implements ISMSNotificationHandler {
-
+    @Override
     public void sendNotification(User user, String message) throws NotificationException {
-        super.sendNotification(user, message);
+        assertUserIsNotNull(user);
+        assertMessageIsNotEmpty(message);
+        assertUserHasValidInfo(user.getPhoneNumber());
 
-        String phoneNumber = getPhoneNumber(user);
-        System.out.println("Sending SMS to " + phoneNumber + ": " + message);
+        String phoneNumber = user.getPhoneNumber();
+        System.out.println("Sending SMS to " + phoneNumber + " with message: " + message);
     }
 
-    public String getPhoneNumber(User user) {
-        Optional<String> phoneNumber = Optional.ofNullable(user.getPhoneNumber());
-        return phoneNumber.orElseThrow(() -> new NotificationException("Phone number is required for SMS notifications"));
+    @Override
+    public boolean canSendMessage(User user) {
+        return user != null && StringUtils.isNotEmpty(user.getPhoneNumber());
     }
+
 }

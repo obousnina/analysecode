@@ -1,23 +1,24 @@
 package fr.epsi.notification.impl;
 
-import fr.epsi.notification.IPushNotificationHandler;
 import fr.epsi.notification.NotificationException;
 import fr.epsi.user.User;
+import org.apache.commons.lang.StringUtils;
 
-import java.util.Optional;
+public class PushNotificationHandler extends AbstractNotificationHandler {
 
-public class PushNotificationHandler extends AbstractNotificationHandler implements IPushNotificationHandler {
-
+    @Override
     public void sendNotification(User user, String message) throws NotificationException {
-        super.sendNotification(user, message);
+        assertUserIsNotNull(user);
+        assertMessageIsNotEmpty(message);
+        assertUserHasValidInfo(user.getDeviceToken());
 
-        String deviceToken = getDeviceToken(user);
-        System.out.println("Sending push notification to device token " + deviceToken + ": " + message);
+        String deviceToken = user.getDeviceToken();
+        System.out.println("Sending push notification to device with token " + deviceToken + " with message: " + message);
     }
 
-    public String getDeviceToken(User user) {
-        Optional<String> deviceToken = Optional.ofNullable(user.getDeviceToken());
-        return deviceToken.orElseThrow(() -> new NotificationException("Device token is required for push notifications"));
+    @Override
+    public boolean canSendMessage(User user) {
+        return user != null && StringUtils.isNotEmpty(user.getDeviceToken());
     }
 
 }

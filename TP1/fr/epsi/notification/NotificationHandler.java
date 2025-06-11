@@ -6,4 +6,6 @@ public interface NotificationHandler {
 
     void sendNotification(User user, String message) throws NotificationException;
 
+    boolean canSendMessage(User user);
+
 }

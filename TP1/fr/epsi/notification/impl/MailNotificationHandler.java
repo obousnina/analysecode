@@ -1,23 +1,24 @@
 package fr.epsi.notification.impl;
 
-import fr.epsi.notification.IMailNotificationHandler;
 import fr.epsi.notification.NotificationException;
 import fr.epsi.user.User;
+import org.apache.commons.lang.StringUtils;
 
-import java.util.Optional;
+public class MailNotificationHandler extends AbstractNotificationHandler {
 
-public class MailNotificationHandler extends AbstractNotificationHandler implements IMailNotificationHandler {
-
+    @Override
     public void sendNotification(User user, String message) throws NotificationException {
-        super.sendNotification(user, message);
+        assertUserIsNotNull(user);
+        assertMessageIsNotEmpty(message);
+        assertUserHasValidInfo(user.getEmail());
 
-        String emailAddress = getEmailAddress(user);
-        System.out.println("Sending email to " + emailAddress + ": " + message);
+        String email = user.getEmail();
+        System.out.println("Sending email to " + email + " with message: " + message);
     }
 
-    public String getEmailAddress(User user) {
-        Optional<String> emailAddress = Optional.ofNullable(user.getEmail());
-        return emailAddress.orElseThrow(() -> new NotificationException("Email address is required for mail notifications"));
+    @Override
+    public boolean canSendMessage(User user) {
+        return user != null && StringUtils.isNotEmpty(user.getEmail());
     }
 
 }

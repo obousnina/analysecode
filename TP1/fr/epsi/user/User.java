@@ -1,5 +1,7 @@
 package fr.epsi.user;
 
+import java.util.Optional;
+
 public class User {
 
     private String email;
