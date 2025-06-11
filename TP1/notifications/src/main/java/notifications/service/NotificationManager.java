@@ -7,30 +7,26 @@ import notifications.channels.EmailChannel;
 import notifications.channels.PushChannel;
 import notifications.channels.SMSChannel;
 import notifications.interfaces.NotificationChannel;
-import notifications.model.Utilisateur;
+import notifications.model.User;
 
 public class NotificationManager {
-    private final List<NotificationChannel> canaux;
+    private final List<NotificationChannel> channels;
 
     public NotificationManager() {
-        this.canaux = new ArrayList<>();
-        this.canaux.add(new EmailChannel());
-        this.canaux.add(new SMSChannel());
-        this.canaux.add(new PushChannel());
+        this.channels = new ArrayList<>();
+        this.channels.add(new EmailChannel());
+        this.channels.add(new SMSChannel());
+        this.channels.add(new PushChannel());
     }
 
-    public void ajouterCanal(NotificationChannel canal) {
-        this.canaux.add(canal);
+    public void addChannel(NotificationChannel channel) {
+        this.channels.add(channel);
     }
 
-    public void envoyerNotification(Utilisateur utilisateur, String message) {
-        for (NotificationChannel canal : canaux) {
-            if (canal instanceof EmailChannel && canal.canSend(utilisateur.getEmail())) {
-                canal.send(utilisateur.getEmail(), message);
-            } else if (canal instanceof SMSChannel && canal.canSend(utilisateur.getNumeroTelephone())) {
-                canal.send(utilisateur.getNumeroTelephone(), message);
-            } else if (canal instanceof PushChannel && canal.canSend(utilisateur.getDeviceToken())) {
-                canal.send(utilisateur.getDeviceToken(), message);
+    public void sendNotification(User user, String message) {
+        for (NotificationChannel channel : channels) {
+            if (channel.canSend(user)) {
+                channel.send(user, message);
             }
         }
     }

@@ -1,13 +1,13 @@
 package notifications.model;
 
-public class Utilisateur {
+public class User {
     private String email;
-    private String numeroTelephone;
+    private String phoneNumber;
     private String deviceToken;
 
-    public Utilisateur(String email, String numeroTelephone, String deviceToken) {
+    public User(String email, String phoneNumber, String deviceToken) {
         this.email = email;
-        this.numeroTelephone = numeroTelephone;
+        this.phoneNumber = phoneNumber;
         this.deviceToken = deviceToken;
     }
 
@@ -19,12 +19,12 @@ public class Utilisateur {
         this.email = email;
     }
 
-    public String getNumeroTelephone() {
-        return numeroTelephone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setNumeroTelephone(String numeroTelephone) {
-        this.numeroTelephone = numeroTelephone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getDeviceToken() {
@@ -34,4 +34,4 @@ public class Utilisateur {
     public void setDeviceToken(String deviceToken) {
         this.deviceToken = deviceToken;
     }
-} 
+}

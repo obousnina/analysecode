@@ -1,74 +1,73 @@
 package notifications;
 
 import junit.framework.TestCase;
-import notifications.model.Utilisateur;
+import notifications.model.User;
 import notifications.service.NotificationManager;
 
 public class NotificationManagerTest extends TestCase {
     private NotificationManager notificationManager;
-    private Utilisateur utilisateur;
+    private User utilisateur;
 
     @Override
     protected void setUp() {
         notificationManager = new NotificationManager();
-        utilisateur = new Utilisateur(
-            "test@example.com",
-            "+33612345678",
-            "device-token-123"
-        );
+        utilisateur = new User(
+                "test@example.com",
+                "+33612345678",
+                "device-token-123");
     }
 
     public void testEnvoiNotificationUtilisateurComplet() {
-        notificationManager.envoyerNotification(utilisateur, "Test message complet");
+        notificationManager.sendNotification(utilisateur, "Test message complet");
     }
 
     public void testEnvoiNotificationUtilisateurSansEmail() {
-        Utilisateur utilisateurSansEmail = new Utilisateur(null, "+33612345678", "device-token-123");
-        notificationManager.envoyerNotification(utilisateurSansEmail, "Test message sans email");
+        User utilisateurSansEmail = new User(null, "+33612345678", "device-token-123");
+        notificationManager.sendNotification(utilisateurSansEmail, "Test message sans email");
     }
 
     public void testEnvoiNotificationUtilisateurSansTelephone() {
-        Utilisateur utilisateurSansTel = new Utilisateur("test@example.com", null, "device-token-123");
-        notificationManager.envoyerNotification(utilisateurSansTel, "Test message sans téléphone");
+        User utilisateurSansTel = new User("test@example.com", null, "device-token-123");
+        notificationManager.sendNotification(utilisateurSansTel, "Test message sans téléphone");
     }
 
     public void testEnvoiNotificationUtilisateurSansDeviceToken() {
-        Utilisateur utilisateurSansToken = new Utilisateur("test@example.com", "+33612345678", null);
-        notificationManager.envoyerNotification(utilisateurSansToken, "Test message sans token");
+        User utilisateurSansToken = new User("test@example.com", "+33612345678", null);
+        notificationManager.sendNotification(utilisateurSansToken, "Test message sans token");
     }
 
     public void testEnvoiNotificationUtilisateurVide() {
-        Utilisateur utilisateurVide = new Utilisateur(null, null, null);
-        notificationManager.envoyerNotification(utilisateurVide, "Test message utilisateur vide");
+        User utilisateurVide = new User(null, null, null);
+        notificationManager.sendNotification(utilisateurVide, "Test message utilisateur vide");
     }
 
     public void testEnvoiNotificationEmailInvalide() {
-        Utilisateur utilisateurEmailInvalide = new Utilisateur("email-invalide", "+33612345678", "device-token-123");
-        notificationManager.envoyerNotification(utilisateurEmailInvalide, "Test message email invalide");
+        User utilisateurEmailInvalide = new User("email-invalide", "+33612345678", "device-token-123");
+        notificationManager.sendNotification(utilisateurEmailInvalide, "Test message email invalide");
     }
 
     public void testEnvoiNotificationTelephoneInvalide() {
-        Utilisateur utilisateurTelInvalide = new Utilisateur("test@example.com", "123", "device-token-123");
-        notificationManager.envoyerNotification(utilisateurTelInvalide, "Test message téléphone invalide");
+        User utilisateurTelInvalide = new User("test@example.com", "123", "device-token-123");
+        notificationManager.sendNotification(utilisateurTelInvalide, "Test message téléphone invalide");
     }
 
     public void testEnvoiNotificationMessageVide() {
-        notificationManager.envoyerNotification(utilisateur, "");
+        notificationManager.sendNotification(utilisateur, "");
     }
 
     public void testEnvoiNotificationMessageNull() {
-        notificationManager.envoyerNotification(utilisateur, null);
+        notificationManager.sendNotification(utilisateur, null);
     }
 
     public void testEnvoiNotificationMultiples() {
         // Test d'envoi de plusieurs notifications consécutives
         for (int i = 0; i < 3; i++) {
-            notificationManager.envoyerNotification(utilisateur, "Message test " + (i + 1));
+            notificationManager.sendNotification(utilisateur, "Message test " + (i + 1));
         }
     }
 
     public void testEnvoiNotificationCaracteresSpeciaux() {
         String messageSpecial = "Message avec caractères spéciaux : éàçù€$£";
-        notificationManager.envoyerNotification(utilisateur, messageSpecial);
+        notificationManager.sendNotification(utilisateur, messageSpecial);
     }
-} 
+}
