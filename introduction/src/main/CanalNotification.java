@@ -1,0 +1,15 @@
+package src.main;
+
+public interface CanalNotification {
+    void envoyer(Utilisateur utilisateur, String message);
+
+    class SmsNotification implements CanalNotification {
+        @Override
+        public void envoyer(Utilisateur utilisateur, String message) {
+            String numero = utilisateur.getCanal("sms");
+            if (numero != null) {
+                System.out.println("Envoi du SMS à " + numero + " : " + message);
+            }
+        }
+    }
+}

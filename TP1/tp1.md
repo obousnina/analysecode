@@ -12,9 +12,13 @@ Une application Java gère l’envoi de notifications à des utilisateurs, en fo
 Voici le code initial simplifié (fourni aux étudiants) :
 
 ```java
-public class NotificationManager {
 
-    public void envoyerNotification(Utilisateur utilisateur, String message) {
+
+public class src.main.
+
+NotificationManager {
+
+    public void envoyerNotification (Utilisateur utilisateur, String message){
         if (utilisateur.getEmail() != null) {
             System.out.println("Envoi de l’email à " + utilisateur.getEmail() + " : " + message);
         }
@@ -33,7 +37,7 @@ public class NotificationManager {
 Et la classe utilisateur :
 
 ```java
-public class Utilisateur {
+public class src.main.Utilisateur {
     private String email;
     private String numeroTelephone;
     private String deviceToken;
