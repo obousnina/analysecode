@@ -11,15 +11,16 @@ public class User {
     private String phoneNumber;
     private String deviceToken;
 
-    public User(String email, String phoneNumber, String deviceToken) {
     /**
      * Constructor which define a User and its attributes.
      *
      * @param email       which is a String corresponding the the email of the User.
-     * @param numberPhone which is a String corresponding to the number phone of the User.
-     * @param deviceToken which is a String corresponding to the token of the device used by the User.
+     * @param phoneNumber which is a String corresponding to the number phone of the
+     *                    User.
+     * @param deviceToken which is a String corresponding to the token of the device
+     *                    used by the User.
      */
-    public User(String email, String numberPhone, String deviceToken) {
+    public User(String email, String phoneNumber, String deviceToken) {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.deviceToken = deviceToken;
@@ -43,26 +44,23 @@ public class User {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
     /**
      * Getter to get the phone number of the User.
      *
      * @returna a String corresponding to the phone number of the User.
      */
-    public String getNumberphone() {
-        return numberphone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     /**
      * Setter to set the phone number of the User.
      *
-     * @param numberPhone is a Strign corresponding to the new phone number of the User.
+     * @param numberPhone is a Strign corresponding to the new phone number of the
+     *                    User.
      */
-    public void setNumberphone(String numberPhone) {
-        this.numberphone = numberPhone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     /**
