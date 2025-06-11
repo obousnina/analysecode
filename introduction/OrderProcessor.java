@@ -1,6 +1,9 @@
 import java.util.concurrent.atomic.AtomicReference;
 
 public class OrderProcessor {
+
+    private static final double PREMIUM_DISCOUNT = 0.9;
+    private static final double HOLIDAY_DISCOUNT = 0.8;
     public double processOrder(Order order, boolean isPremiumCustomer, String discountCode) {
         AtomicReference<Double> total = new AtomicReference<>((double) 0);
         order.getItems().foreach((item) -> total.updateAndGet(price -> new Double((double) (price + getPrice(item, isPremiumCustomer, discountCode)))));
@@ -11,11 +14,11 @@ public class OrderProcessor {
         double price = item.getQuantity() * item.getUnitPrice();
         // 10% discount for premium customers
         if (isPremiumCustomer) {
-            price *= 0.9;
+            price *= PREMIUM_DISCOUNT;
         }
         // 20% holiday discount
         if (discountCode != null && discountCode.equals(DiscountCode.HOLIDAY_CODE)) {
-            price *= 0.8;
+            price *= HOLIDAY_DISCOUNT;
         }
         return price;
     }
