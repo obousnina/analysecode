@@ -1,30 +1,49 @@
 public class OrderProcessor {
-    public double processOrder(Order order, boolean isPremiumCustomer, String discountCode) {
+    private final int bulkOrderThreshold = 10;
+    private final int bulkOrderDiscount = -20;
+    private final int internationalShippingFee = 100;
+    private final double premiumCustomerPriceRatio = 0.9;
+    private final double discountCodePriceRatio = 0.8;
+    private final String availableDiscountCode = "HOLIDAY";
+
+
+    public double applyDiscounts(Order order, boolean isPremiumCustomer, String discountCode) {
         double total = 0;
+
+
         for (OrderItem item : order.getItems()) {
             double price = item.getQuantity() * item.getUnitPrice();
-            // 10% discount for premium customers
-            if (isPremiumCustomer) {
-                price *= 0.9;
-            }
-            // 20% holiday discount
-            if (discountCode != null && discountCode.equals("HOLIDAY")) {
-                price *= 0.8;
-            }
-            total += price;
+            total += price * getPriceRatio(isPremiumCustomer, discountCode);
         }
-        if (total > 1000) {
-            // bulk order discount
-            total -= 50;
-        }
-        if (order.getItems().size() > 10) {
-            // discount for large number of items
-            total -= 20;
-        }
-        if (order.isInternational()) {
-            // international shipping fee
-            total += 100;
-        }
+
+        total += calculateBulkOrderDiscount(order);
+        total += calculateShippingCost(order);
+
         return total;
+    }
+
+    private double getPriceRatio(boolean isPremiumCustomer, String discountCode) {
+        double priceRatio = 1.0;
+        if (isPremiumCustomer) {
+            priceRatio *= premiumCustomerPriceRatio;
+        }
+        if (discountCode != null && discountCode.equals(availableDiscountCode)) {
+            priceRatio *= discountCodePriceRatio;
+        }
+        return priceRatio;
+    }
+
+    private int calculateBulkOrderDiscount(Order order) {
+        if (order.getItems().size() > bulkOrderThreshold) {
+            return bulkOrderDiscount;
+        }
+        return 0;
+    }
+
+    private int calculateShippingCost(Order order) {
+        if (order.isInternational()) {
+            return internationalShippingFee;
+        }
+        return 0;
     }
 }
