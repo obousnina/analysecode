@@ -1,30 +1,44 @@
 public class OrderProcessor {
+
+    private static final double PREMIUM_DISCOUNT = 0.9;
+    private static final double HOLIDAY_DISCOUNT = 0.8;
+    private static final double BULK_DISCOUNT = 50.0;
+    private static final double LARGE_ORDER_DISCOUNT = 20.0;
+    private static final double INTERNATIONAL_FEE = 100.0;
+
     public double processOrder(Order order, boolean isPremiumCustomer, String discountCode) {
         double total = 0;
         for (OrderItem item : order.getItems()) {
-            double price = item.getQuantity() * item.getUnitPrice();
-            // 10% discount for premium customers
-            if (isPremiumCustomer) {
-                price *= 0.9;
-            }
-            // 20% holiday discount
-            if (discountCode != null && discountCode.equals("HOLIDAY")) {
-                price *= 0.8;
-            }
-            total += price;
+            total += calculateItemPrice(item, isPremiumCustomer, discountCode);
         }
-        if (total > 1000) {
-            // bulk order discount
-            total -= 50;
-        }
-        if (order.getItems().size() > 10) {
-            // discount for large number of items
-            total -= 20;
-        }
-        if (order.isInternational()) {
-            // international shipping fee
-            total += 100;
-        }
+
+        total = applyBulkDiscount(total);
+        total = applyItemCountDiscount(total, order);
+        total = addInternationalShipping(total, order);
+
         return total;
+    }
+
+    private double calculateItemPrice(OrderItem item, boolean isPremiumCustomer, String discountCode) {
+        double price = item.getQuantity() * item.getUnitPrice();
+        if (isPremiumCustomer) {
+            price *= PREMIUM_DISCOUNT;
+        }
+        if ("HOLIDAY".equals(discountCode)) {
+            price *= HOLIDAY_DISCOUNT;
+        }
+        return price;
+    }
+
+    private double applyBulkDiscount(double total) {
+        return total > 1000 ? total - BULK_DISCOUNT : total;
+    }
+
+    private double applyItemCountDiscount(double total, Order order) {
+        return order.getItems().size() > 10 ? total - LARGE_ORDER_DISCOUNT : total;
+    }
+
+    private double addInternationalShipping(double total, Order order) {
+        return order.isInternational() ? total + INTERNATIONAL_FEE : total;
     }
 }
