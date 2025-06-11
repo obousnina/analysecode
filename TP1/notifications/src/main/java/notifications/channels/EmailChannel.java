@@ -3,6 +3,10 @@ package notifications.channels;
 import notifications.interfaces.NotificationChannel;
 import notifications.model.User;
 
+/**
+ * Implementation of NotificationChannel for email notifications.
+ * This channel sends notifications via email to users.
+ */
 public class EmailChannel implements NotificationChannel {
     @Override
     public void send(User user, String message) {

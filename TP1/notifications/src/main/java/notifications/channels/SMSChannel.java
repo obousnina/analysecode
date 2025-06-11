@@ -3,6 +3,10 @@ package notifications.channels;
 import notifications.interfaces.NotificationChannel;
 import notifications.model.User;
 
+/**
+ * Implementation of NotificationChannel for SMS notifications.
+ * This channel sends notifications via SMS to user phone numbers.
+ */
 public class SMSChannel implements NotificationChannel {
     @Override
     public void send(User user, String message) {
