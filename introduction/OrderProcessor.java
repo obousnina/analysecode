@@ -67,4 +67,4 @@ public class OrderProcessor {
 // - Suppression des magic numbers via des const nommées
 // - Découpage de la méthode processOrder en sous-méthodes private pour plus de lisibilité
 // - Ajout d'une vérification de null sur l'objet Order
-// - Comparaison de chaînes sécurisée avec equalsIgnoreCase
+// - Comparaison de stsrings sécurisée avec equalsIgnoreCase
