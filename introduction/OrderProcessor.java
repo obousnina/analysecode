@@ -1,15 +1,13 @@
 public class OrderProcessor {
-    public double processOrder(Order order, boolean isPremiumCustomer, String discountCode) {
+    public double processOrder(Order order, DiscountCode discount) {
         double total = 0;
         for (OrderItem item : order.getItems()) {
             double price = item.getQuantity() * item.getUnitPrice();
-            // 10% discount for premium customers
-            if (isPremiumCustomer) {
-                price *= 0.9;
-            }
-            // 20% holiday discount
-            if (discountCode != null && discountCode.equals("HOLIDAY")) {
-                price *= 0.8;
+
+            switch (discount){
+                case PREMIUM -> price *= 0.9;
+                case HOLIDAY -> price *= 0.8;
+                case NONE ->  price *= 1; // nécessitera peut-être d'altérer la structure des données
             }
             total += price;
         }
