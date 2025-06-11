@@ -29,18 +29,10 @@ public class OrderProcessor {
     }
 }
 
+import introduction.OrderConstants;
+
 public class OrderProcessorRefactorized {
     private Map<String, Double> discountCodes;
-    
-    // Constants for reusability and clarity
-    // TODO : Consider importing it from a database / API and not hardcoding
-    private static final double PREMIUM_DISCOUNT_RATE = 0.9;
-    private static final double BULK_ORDER_THRESHOLD = 1000;
-    private static final double BULK_ORDER_DISCOUNT = 50;
-    private static final int LARGE_ITEM_THRESHOLD = 10;
-    private static final double LARGE_ITEM_DISCOUNT = 20;
-    private static final double INTERNATIONAL_FEE = 100;
-
     // TODO : Consider using a database / API for discount codes
     public OrderProcessorRefactorized() {
         this.discountCodes = new HashMap<>();
@@ -65,7 +57,7 @@ public class OrderProcessorRefactorized {
             double price = item.getQuantity() * item.getUnitPrice();
             
             if (isPremiumCustomer) {
-                price *= PREMIUM_DISCOUNT_RATE;
+                price *= OrderConstants.PREMIUM_DISCOUNT_RATE;
             }
             
             if (discountCode != null && discountCodes.containsKey(discountCode)) {
@@ -78,22 +70,22 @@ public class OrderProcessorRefactorized {
     }
 
     private double setBulkOrderDiscount(double total) {
-        if (total > BULK_ORDER_THRESHOLD) {
-            return total - BULK_ORDER_DISCOUNT;
+        if (total > OrderConstants.BULK_ORDER_THRESHOLD) {
+            return total - OrderConstants.BULK_ORDER_DISCOUNT;
         }
         return total;
     }
 
     private double setLargeItemDiscount(double total, Order order) {
-        if (order.getItems().size() > LARGE_ITEM_THRESHOLD) {
-            return total - LARGE_ITEM_DISCOUNT;
+        if (order.getItems().size() > OrderConstants.LARGE_ITEM_THRESHOLD) {
+            return total - OrderConstants.LARGE_ITEM_DISCOUNT;
         }
         return total;
     }
 
     private double setInternationalShippingFee(double total, Order order) {
         if (order.isInternational()) {
-            return total + INTERNATIONAL_FEE;
+            return total + OrderConstants.INTERNATIONAL_FEE;
         }
         return total;
     }
