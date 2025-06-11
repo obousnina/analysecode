@@ -4,12 +4,12 @@ import notifications.interfaces.NotificationChannel;
 
 public class SMSChannel implements NotificationChannel {
     @Override
-    public void envoyer(String destinataire, String message) {
-        System.out.println("Envoi d'un SMS à " + destinataire + " : " + message);
+    public void send(String target, String message) {
+        System.out.println("Envoi d'un SMS à " + target + " : " + message);
     }
 
     @Override
-    public boolean peutEnvoyer(String destinataire) {
-        return destinataire != null && destinataire.matches("\\+?[0-9]{10,}");
+    public boolean canSend(String target) {
+        return target != null && target.matches("\\+?[0-9]{10,}");
     }
-} 
+}

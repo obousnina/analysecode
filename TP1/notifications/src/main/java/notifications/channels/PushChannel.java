@@ -4,12 +4,12 @@ import notifications.interfaces.NotificationChannel;
 
 public class PushChannel implements NotificationChannel {
     @Override
-    public void envoyer(String destinataire, String message) {
-        System.out.println("Envoi d'une notification push à " + destinataire + " : " + message);
+    public void send(String target, String message) {
+        System.out.println("Envoi d'une notification push à " + target + " : " + message);
     }
 
     @Override
-    public boolean peutEnvoyer(String destinataire) {
-        return destinataire != null && destinataire.length() > 0;
+    public boolean canSend(String target) {
+        return target != null && target.length() > 0;
     }
-} 
+}

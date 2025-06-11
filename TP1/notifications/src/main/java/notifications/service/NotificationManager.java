@@ -25,13 +25,13 @@ public class NotificationManager {
 
     public void envoyerNotification(Utilisateur utilisateur, String message) {
         for (NotificationChannel canal : canaux) {
-            if (canal instanceof EmailChannel && canal.peutEnvoyer(utilisateur.getEmail())) {
-                canal.envoyer(utilisateur.getEmail(), message);
-            } else if (canal instanceof SMSChannel && canal.peutEnvoyer(utilisateur.getNumeroTelephone())) {
-                canal.envoyer(utilisateur.getNumeroTelephone(), message);
-            } else if (canal instanceof PushChannel && canal.peutEnvoyer(utilisateur.getDeviceToken())) {
-                canal.envoyer(utilisateur.getDeviceToken(), message);
+            if (canal instanceof EmailChannel && canal.canSend(utilisateur.getEmail())) {
+                canal.send(utilisateur.getEmail(), message);
+            } else if (canal instanceof SMSChannel && canal.canSend(utilisateur.getNumeroTelephone())) {
+                canal.send(utilisateur.getNumeroTelephone(), message);
+            } else if (canal instanceof PushChannel && canal.canSend(utilisateur.getDeviceToken())) {
+                canal.send(utilisateur.getDeviceToken(), message);
             }
         }
     }
-} 
+}
