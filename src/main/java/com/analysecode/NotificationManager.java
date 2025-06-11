@@ -13,16 +13,32 @@ import java.util.List;
 public class NotificationManager {
     private final List<CanalNotification> channels = new ArrayList<>();
 
+    /**
+     * Default constructor.
+     * Initializes the manager with standard channels (email, SMS, push notifications).
+     */
     public NotificationManager() {
         channels.add(new EmailNotification());
         channels.add(new SMSNotification());
         channels.add(new PushNotification());
     }
 
+    /**
+     * Adds a new notification channel to the manager.
+     *
+     * @param channel the notification channel to add
+     */
     public void addChannel(CanalNotification channel) {
         channels.add(channel);
     }
 
+    /**
+     * Sends a notification to a user through all available channels for that user.
+     * If no channel is available, a message is displayed in the console.
+     *
+     * @param user    the recipient user of the notification
+     * @param message the content of the message to send
+     */
     public void sendNotification(User user, String message) {
         boolean notificationSent = false;
 
