@@ -7,7 +7,7 @@ public class TotalPrice {
         }
     }
 
-    public static void large(double total){
+    public static void large(Order order, double total){
 
         if (order.getItems().size() > 10) {
             // discount for large number of items
@@ -15,7 +15,7 @@ public class TotalPrice {
         }
     }
 
-    public static void international(double total){
+    public static void international(Order order,double total){
 
         if (order.isInternational()) {
             // international shipping fee

@@ -12,8 +12,8 @@ public class OrderProcessor {
             total += price;
         }
         TotalPrice.bulk(total);
-        TotalPrice.large(total);
-        TotalPrice.international(total);
+        TotalPrice.large(order, total);
+        TotalPrice.international(order, total);
 
         return total;
     }
