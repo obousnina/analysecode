@@ -1,30 +1,27 @@
+import java.util.List;
+
 public class OrderProcessor {
+
     public double processOrder(Order order, boolean isPremiumCustomer, String discountCode) {
-        double total = 0;
-        for (OrderItem item : order.getItems()) {
-            double price = item.getQuantity() * item.getUnitPrice();
-            // 10% discount for premium customers
-            if (isPremiumCustomer) {
-                price *= 0.9;
-            }
-            // 20% holiday discount
-            if (discountCode != null && discountCode.equals("HOLIDAY")) {
-                price *= 0.8;
-            }
-            total += price;
+        if (order == null || order.getItems() == null || order.getItems().isEmpty()) {
+            throw new IllegalArgumentException("Order or order items cannot be null or empty");
         }
-        if (total > 1000) {
-            // bulk order discount
-            total -= 50;
+
+        PricingPolicy pricingPolicy = new PricingPolicy(isPremiumCustomer, DiscountType.fromCode(discountCode));
+        double total = pricingPolicy.calculateTotal(order.getItems());
+
+        if (pricingPolicy.isBulkOrder(total)) {
+            total -= PricingPolicy.BULK_ORDER_DISCOUNT;
         }
-        if (order.getItems().size() > 10) {
-            // discount for large number of items
-            total -= 20;
+
+        if (pricingPolicy.hasManyItems(order)) {
+            total -= PricingPolicy.LARGE_ITEM_COUNT_DISCOUNT;
         }
+
         if (order.isInternational()) {
-            // international shipping fee
-            total += 100;
+            total += PricingPolicy.INTERNATIONAL_SHIPPING_FEE;
         }
+
         return total;
     }
 }
