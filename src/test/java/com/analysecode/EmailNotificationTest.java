@@ -1,0 +1,72 @@
+package com.analysecode.channel;
+
+import com.analysecode.model.User;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@DisplayName("Email Notification Channel Tests")
+class EmailNotificationTest {
+
+    private EmailNotification emailNotification;
+    private ByteArrayOutputStream outputStream;
+    private PrintStream originalOut;
+    
+    @BeforeEach
+    void setUp() {
+        emailNotification = new EmailNotification();
+        
+        originalOut = System.out;
+        outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+    }
+    
+    @Test
+    @DisplayName("GIVEN a user with email WHEN checking can send THEN returns true")
+    void givenUserWithEmail_whenCheckingCanSend_thenReturnsTrue() {
+        // GIVEN
+        User user = new User("test@example.com", null, null);
+        
+        // WHEN
+        boolean canSend = emailNotification.canSend(user);
+        
+        // THEN
+        assertTrue(canSend);
+    }
+    
+    @Test
+    @DisplayName("GIVEN a user without email WHEN checking can send THEN returns false")
+    void givenUserWithoutEmail_whenCheckingCanSend_thenReturnsFalse() {
+        // GIVEN
+        User user = new User(null, "0612345678", null);
+        
+        // WHEN
+        boolean canSend = emailNotification.canSend(user);
+        
+        // THEN
+        assertFalse(canSend);
+    }
+    
+    @Test
+    @DisplayName("GIVEN a user with email WHEN sending message THEN message is sent correctly")
+    void givenUserWithEmail_whenSendingMessage_thenMessageIsSentCorrectly() {
+        // GIVEN
+        User user = new User("recipient@example.com", null, null);
+        String message = "Test email message";
+        
+        // WHEN
+        emailNotification.send(user, message);
+        
+        // THEN
+        String output = outputStream.toString();
+        assertTrue(output.contains("Sending email to recipient@example.com"));
+        assertTrue(output.contains(message));
+    }
+}
