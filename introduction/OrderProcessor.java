@@ -11,18 +11,10 @@ public class OrderProcessor {
             }
             total += price;
         }
-        if (total > 1000) {
-            // bulk order discount
-            total -= 50;
-        }
-        if (order.getItems().size() > 10) {
-            // discount for large number of items
-            total -= 20;
-        }
-        if (order.isInternational()) {
-            // international shipping fee
-            total += 100;
-        }
+        TotalPrice.bulk(total);
+        TotalPrice.large(total);
+        TotalPrice.international(total);
+
         return total;
     }
 }
