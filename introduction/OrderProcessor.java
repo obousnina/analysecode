@@ -22,13 +22,13 @@ public class OrderProcessor {
     private double getRealPrice(double price, Order order) {
         var newPrice = price;
         if (price > Constant.BULK_ORDER) {
-            newPrice -= 50;
+            newPrice -= DiscountConstant.BULK_REDUCE;
         }
         if (order.getItems().size() > Constant.LARGE_ITEM) {
-            newPrice -= 20;
+            newPrice -= DiscountConstant.LARGE_ITEM_REDUCE;
         }
         if (order.isInternational()) {
-            newPrice += 100;
+            newPrice += DiscountConstant.INTERNATIONAL_AUGMENTATION;
         }
         return newPrice;
     }
