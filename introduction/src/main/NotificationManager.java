@@ -1,7 +1,9 @@
+package src.main;
+
 import java.util.List;
 
 public class NotificationManager {
-    private final List<CanalNotification> canaux;
+    private List<CanalNotification> canaux;
 
     public NotificationManager(List<CanalNotification> canaux) {
         this.canaux = canaux;
