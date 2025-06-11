@@ -1,15 +1,18 @@
-package fr.epsi.test.impl;
+package fr.epsi.notification.impl;
 
-import fr.epsi.test.IMailNotificationHandler;
-import fr.epsi.test.NotificationException;
-import fr.epsi.test.user.User;
+import fr.epsi.notification.IMailNotificationHandler;
+import fr.epsi.notification.NotificationException;
+import fr.epsi.user.User;
 
 import java.util.Optional;
 
 public class MailNotificationHandler extends AbstractNotificationHandler implements IMailNotificationHandler {
 
     public void sendNotification(User user, String message) throws NotificationException {
+        super.sendNotification(user, message);
 
+        String emailAddress = getEmailAddress(user);
+        System.out.println("Sending email to " + emailAddress + ": " + message);
     }
 
     public String getEmailAddress(User user) {

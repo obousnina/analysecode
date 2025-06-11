@@ -1,6 +1,6 @@
-package fr.epsi.test;
+package fr.epsi.notification;
 
-import fr.epsi.test.user.User;
+import fr.epsi.user.User;
 
 public interface NotificationHandler {
 

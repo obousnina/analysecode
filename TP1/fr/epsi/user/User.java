@@ -1,4 +1,4 @@
-package fr.epsi.test.user;
+package fr.epsi.user;
 
 public class User {
 
