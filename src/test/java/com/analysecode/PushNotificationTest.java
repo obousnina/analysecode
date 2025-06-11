@@ -1,5 +1,6 @@
-package com.analysecode.channel;
+package com.analysecode;
 
+import com.analysecode.channel.PushNotification;
 import com.analysecode.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,13 +17,11 @@ class PushNotificationTest {
 
     private PushNotification pushNotification;
     private ByteArrayOutputStream outputStream;
-    private PrintStream originalOut;
-    
+
     @BeforeEach
     void setUp() {
         pushNotification = new PushNotification();
         
-        originalOut = System.out;
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
     }

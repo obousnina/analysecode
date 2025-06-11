@@ -1,5 +1,6 @@
-package com.analysecode.channel;
+package com.analysecode;
 
+import com.analysecode.channel.SMSNotification;
 import com.analysecode.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,13 +17,11 @@ class SMSNotificationTest {
 
     private SMSNotification smsNotification;
     private ByteArrayOutputStream outputStream;
-    private PrintStream originalOut;
-    
+
     @BeforeEach
     void setUp() {
         smsNotification = new SMSNotification();
         
-        originalOut = System.out;
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
     }

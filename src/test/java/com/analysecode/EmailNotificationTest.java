@@ -1,5 +1,6 @@
-package com.analysecode.channel;
+package com.analysecode;
 
+import com.analysecode.channel.EmailNotification;
 import com.analysecode.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,13 +17,11 @@ class EmailNotificationTest {
 
     private EmailNotification emailNotification;
     private ByteArrayOutputStream outputStream;
-    private PrintStream originalOut;
-    
+
     @BeforeEach
     void setUp() {
         emailNotification = new EmailNotification();
         
-        originalOut = System.out;
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
     }
