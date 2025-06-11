@@ -7,6 +7,12 @@ import org.apache.commons.lang.StringUtils;
 
 public abstract class AbstractNotificationHandler implements NotificationHandler {
 
+    @Override
+    public void sendNotification(User user, String message) throws NotificationException {
+        assertUserIsNotNull(user);
+        assertMessageIsNotEmpty(message);
+    }
+
     void assertUserIsNotNull(User user) {
         if (user == null) {
             throw new NotificationException("User cannot be null");

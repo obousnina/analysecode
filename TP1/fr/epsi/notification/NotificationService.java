@@ -34,19 +34,29 @@ public class NotificationService {
         }
     }
 
+    public void sendNotification(User user, String message, NotificationType type) {
+        if (user == null || message == null || message.isEmpty()) {
+            throw new IllegalArgumentException("User and message must not be null or empty");
+        }
+
+        NotificationHandler handler = handlers.get(type);
+        if (handler == null) {
+            throw new IllegalArgumentException("No handler found for notification type: " + type);
+        }
+
+        if (handler.canSendMessage(user)) {
+            try {
+                handler.sendNotification(user, message);
+            } catch (NotificationException | IllegalArgumentException e) {
+                LOGGER.info("Failed to send notification using " + handler.getClass().getSimpleName() + ": " + e.getMessage());
+            }
+        }
+    }
+
     public enum NotificationType {
         MAIL,
         SMS,
         PUSH
-    }
-
-    public static void main(String[] args) {
-        User test = new User();
-        test.setEmail("test@test.com");
-        test.setPhoneNumber("1234567890");
-        test.setDeviceToken("test");
-        NotificationService service = new NotificationService();
-        service.sendNotification(test, "Hello, this is a test notification!");
     }
 
 }

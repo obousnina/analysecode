@@ -8,8 +8,7 @@ public class MailNotificationHandler extends AbstractNotificationHandler {
 
     @Override
     public void sendNotification(User user, String message) throws NotificationException {
-        assertUserIsNotNull(user);
-        assertMessageIsNotEmpty(message);
+        super.sendNotification(user, message);
         assertUserHasValidInfo(user.getEmail());
 
         String email = user.getEmail();

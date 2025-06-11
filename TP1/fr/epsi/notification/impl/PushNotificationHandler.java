@@ -8,8 +8,7 @@ public class PushNotificationHandler extends AbstractNotificationHandler {
 
     @Override
     public void sendNotification(User user, String message) throws NotificationException {
-        assertUserIsNotNull(user);
-        assertMessageIsNotEmpty(message);
+        super.sendNotification(user, message);
         assertUserHasValidInfo(user.getDeviceToken());
 
         String deviceToken = user.getDeviceToken();
