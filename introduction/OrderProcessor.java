@@ -1,8 +1,8 @@
-
-/**
+/****
  * Calcule le total final d'une commande après application des remises et frais.
  */
 public class OrderProcessor {
+    
     public double processOrder(Order order, boolean isPremiumCustomer, String discountCode) {
         double total = 0;
         // Traite chaque article de la commande
@@ -28,26 +28,26 @@ public class OrderProcessor {
 
     // Retourne un prix avec 10 % de réduction si le client est premium
     private double applyPremiumDiscount(double price, boolean isPremiumCustomer) {
-        return isPremiumCustomer ? price * 0.9 : price;
+        return isPremiumCustomer ? price * (1 - OrderConstants.PREMIUM_DISCOUNT) : price;
     }
 
     // Retourne un prix avec 20 % de réduction si le code est "HOLIDAY"
     private double applyHolidayDiscount(double price, String discountCode) {
-        return "HOLIDAY".equals(discountCode) ? price * 0.8 : price;
+        return OrderConstants.HOLIDAY_CODE.equals(discountCode) ? price * (1 - OrderConstants.HOLIDAY_DISCOUNT) : price;
     }
 
     // Applique une réduction fixe de 50 € si le total dépasse 1000 €
     private double applyBulkOrderDiscount(double total) {
-        return total > 1000 ? total - 50 : total;
+        return total > 1000 ? total - OrderConstants.BULK_DISCOUNT : total;
     }
 
     // Applique une réduction fixe de 20 € si le nombre d'articles dépasse 10
     private double applyLargeItemDiscount(double total, int itemCount) {
-        return itemCount > 10 ? total - 20 : total;
+        return itemCount > OrderConstants.LARGE_ITEM_THRESHOLD ? total - OrderConstants.LARGE_ITEM_DISCOUNT : total;
     }
 
     // Ajoute un supplément fixe de 100 € si la commande est internationale
     private double applyInternationalShippingFee(double total, boolean isInternational) {
-        return isInternational ? total + 100 : total;
+        return isInternational ? total + OrderConstants.INTERNATIONAL_SHIPPING_FEE : total;
     }
 }
