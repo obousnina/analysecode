@@ -10,11 +10,10 @@ import notifications.model.User;
 public class PushChannel implements NotificationChannel {
     @Override
     public boolean send(User user, String message) {
-        boolean result = false;
         if (user != null && user.getDeviceToken() != null && user.getDeviceToken().length() > 0) {
             System.out.println("Envoi d'une push notification à " + user.getDeviceToken() + " : " + message);
-            result = true;
+            return true;
         }
-        return result;
+        return false;
     }
 }

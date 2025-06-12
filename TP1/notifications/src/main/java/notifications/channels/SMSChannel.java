@@ -10,11 +10,10 @@ import notifications.model.User;
 public class SMSChannel implements NotificationChannel {
     @Override
     public boolean send(User user, String message) {
-        boolean result = false;
-        if ( user != null && user.getPhoneNumber() != null && user.getPhoneNumber().matches("\\+?[0-9]{10,}")) {
+        if (user != null && user.getPhoneNumber() != null && user.getPhoneNumber().matches("\\+?[0-9]{10,}")) {
             System.out.println("Envoi d'un SMS à " + user.getPhoneNumber() + " : " + message);
-            result = true;
+            return true;
         }
-        return result;
+        return false;
     }
 }
