@@ -11,7 +11,7 @@ public class EmailChannel implements NotificationChannel {
     @Override
     public boolean send(User user, String message) {
         if (user != null && user.getEmail() != null && user.getEmail().contains("@")) {
-            System.out.println("Envoi d'un email à " + user.getEmail() + " : " + message);
+            System.out.println("Sending email to " + user.getEmail() + " : " + message);
             return true;
         }
         return false;

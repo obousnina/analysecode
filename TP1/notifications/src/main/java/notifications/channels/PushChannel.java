@@ -11,7 +11,7 @@ public class PushChannel implements NotificationChannel {
     @Override
     public boolean send(User user, String message) {
         if (user != null && user.getDeviceToken() != null && user.getDeviceToken().length() > 0) {
-            System.out.println("Envoi d'une push notification à " + user.getDeviceToken() + " : " + message);
+            System.out.println("Sending push notification to " + user.getDeviceToken() + " : " + message);
             return true;
         }
         return false;

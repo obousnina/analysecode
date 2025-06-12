@@ -11,6 +11,6 @@ public class App {
                 "+33612345678",
                 "device-token-123");
 
-        manager.sendNotification(utilisateur, "Test de notification");
+        manager.sendNotification(utilisateur, "Notification test");
     }
 }

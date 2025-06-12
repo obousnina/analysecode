@@ -56,7 +56,7 @@ public class User {
     /**
      * Setter to set the phone number of the User.
      *
-     * @param numberPhone is a Strign corresponding to the new phone number of the
+     * @param phoneNumber is a Strign corresponding to the new phone number of the
      *                    User.
      */
     public void setPhoneNumber(String phoneNumber) {
