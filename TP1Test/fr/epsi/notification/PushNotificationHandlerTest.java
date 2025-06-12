@@ -1,6 +1,7 @@
 package fr.epsi.notification;
 
-import fr.epsi.notification.impl.PushNotificationHandler;
+import fr.epsi.notification.exception.NotificationException;
+import fr.epsi.notification.handlers.PushNotificationHandler;
 import fr.epsi.user.User;
 import org.junit.Test;
 
@@ -18,7 +19,7 @@ public class PushNotificationHandlerTest {
     }
 
     @Test
-    public void testCanSendMessageWithInvalidDeviceToken() {
+    public void testCanSendMessageWithNoDeviceToken() {
         PushNotificationHandler handler = new PushNotificationHandler();
         User user = new User();
         user.setDeviceToken("");
@@ -40,7 +41,7 @@ public class PushNotificationHandlerTest {
     }
 
     @Test(expected = NotificationException.class)
-    public void testSendNotificationWithInvalidDeviceToken() throws NotificationException {
+    public void testSendNotificationWithNoDeviceToken() throws NotificationException {
         PushNotificationHandler handler = new PushNotificationHandler();
         User user = new User();
         user.setDeviceToken("");

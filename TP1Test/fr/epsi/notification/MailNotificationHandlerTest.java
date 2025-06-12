@@ -1,6 +1,7 @@
 package fr.epsi.notification;
 
-import fr.epsi.notification.impl.MailNotificationHandler;
+import fr.epsi.notification.exception.NotificationException;
+import fr.epsi.notification.handlers.MailNotificationHandler;
 import fr.epsi.user.User;
 import org.junit.Test;
 
@@ -18,7 +19,7 @@ public class MailNotificationHandlerTest {
     }
 
     @Test
-    public void testCanSendMessageWithInvalidEmail() {
+    public void testCanSendMessageWithNoEmail() {
         MailNotificationHandler handler = new MailNotificationHandler();
         User user = new User();
         user.setEmail("");
@@ -40,7 +41,7 @@ public class MailNotificationHandlerTest {
     }
 
     @Test(expected = NotificationException.class)
-    public void testSendNotificationWithInvalidEmail() throws NotificationException {
+    public void testSendNotificationWithNoEmail() throws NotificationException {
         MailNotificationHandler handler = new MailNotificationHandler();
         User user = new User();
         user.setEmail("");

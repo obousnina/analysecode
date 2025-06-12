@@ -1,5 +1,6 @@
-package fr.epsi.notification;
+package fr.epsi.notification.handlers;
 
+import fr.epsi.notification.exception.NotificationException;
 import fr.epsi.user.User;
 
 public interface NotificationHandler {

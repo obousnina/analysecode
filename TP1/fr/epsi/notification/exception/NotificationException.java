@@ -1,4 +1,4 @@
-package fr.epsi.notification;
+package fr.epsi.notification.exception;
 
 public class NotificationException extends RuntimeException {
     public NotificationException(String message) {

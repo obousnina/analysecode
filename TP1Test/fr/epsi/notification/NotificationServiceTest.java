@@ -1,5 +1,6 @@
 package fr.epsi.notification;
 
+import fr.epsi.notification.service.NotificationService;
 import fr.epsi.user.User;
 import org.junit.Test;
 

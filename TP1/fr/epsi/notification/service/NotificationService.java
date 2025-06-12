@@ -1,8 +1,10 @@
-package fr.epsi.notification;
+package fr.epsi.notification.service;
 
-import fr.epsi.notification.impl.MailNotificationHandler;
-import fr.epsi.notification.impl.PushNotificationHandler;
-import fr.epsi.notification.impl.SMSNotificationHandler;
+import fr.epsi.notification.exception.NotificationException;
+import fr.epsi.notification.handlers.NotificationHandler;
+import fr.epsi.notification.handlers.MailNotificationHandler;
+import fr.epsi.notification.handlers.PushNotificationHandler;
+import fr.epsi.notification.handlers.SMSNotificationHandler;
 import fr.epsi.user.User;
 
 import java.util.Map;

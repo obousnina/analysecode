@@ -1,6 +1,7 @@
 package fr.epsi.notification;
 
-import fr.epsi.notification.impl.SMSNotificationHandler;
+import fr.epsi.notification.exception.NotificationException;
+import fr.epsi.notification.handlers.SMSNotificationHandler;
 import fr.epsi.user.User;
 import org.junit.Test;
 
@@ -18,7 +19,7 @@ public class SMSNotificationHandlerTest {
     }
 
     @Test
-    public void testCanSendMessageWithInvalidPhoneNumber() {
+    public void testCanSendMessageWithNoPhoneNumber() {
         SMSNotificationHandler handler = new SMSNotificationHandler();
         User user = new User();
         user.setPhoneNumber("");
@@ -40,7 +41,7 @@ public class SMSNotificationHandlerTest {
     }
 
     @Test(expected = NotificationException.class)
-    public void testSendNotificationWithInvalidPhoneNumber() throws NotificationException {
+    public void testSendNotificationWithNoPhoneNumber() throws NotificationException {
         SMSNotificationHandler handler = new SMSNotificationHandler();
         User user = new User();
         user.setPhoneNumber("");

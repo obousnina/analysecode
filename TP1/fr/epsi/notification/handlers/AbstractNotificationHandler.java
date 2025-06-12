@@ -1,7 +1,6 @@
-package fr.epsi.notification.impl;
+package fr.epsi.notification.handlers;
 
-import fr.epsi.notification.NotificationException;
-import fr.epsi.notification.NotificationHandler;
+import fr.epsi.notification.exception.NotificationException;
 import fr.epsi.user.User;
 import org.apache.commons.lang.StringUtils;
 
