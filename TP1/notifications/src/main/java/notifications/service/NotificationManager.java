@@ -25,9 +25,7 @@ public class NotificationManager {
 
     public void sendNotification(User user, String message) {
         for (NotificationChannel channel : channels) {
-            if (channel.canSend(user)) {
-                channel.send(user, message);
-            }
+            channel.send(user, message); 
         }
     }
 }
