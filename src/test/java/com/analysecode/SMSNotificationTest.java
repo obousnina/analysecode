@@ -32,11 +32,8 @@ class SMSNotificationTest {
         // GIVEN
         User user = new User(null, "0612345678", null);
         
-        // WHEN
-        boolean canSend = smsNotification.canSend(user);
-        
-        // THEN
-        assertTrue(canSend);
+        // WHEN AND THEN
+        assertTrue(smsNotification.canSend(user));
     }
     
     @Test
@@ -45,11 +42,8 @@ class SMSNotificationTest {
         // GIVEN
         User user = new User("test@example.com", null, null);
         
-        // WHEN
-        boolean canSend = smsNotification.canSend(user);
-        
-        // THEN
-        assertFalse(canSend);
+        // WHEN AND THEN
+        assertFalse(smsNotification.canSend(user));
     }
     
     @Test

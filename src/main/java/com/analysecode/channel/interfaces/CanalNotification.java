@@ -1,4 +1,4 @@
-package com.analysecode.channel.in;
+package com.analysecode.channel.interfaces;
 
 
 import com.analysecode.model.User;
@@ -15,7 +15,6 @@ public interface CanalNotification {
 
     /**
      * Checks if this notification channel can be used to send messages to the specified user.
-     *
      * This might verify if the user has the necessary contact information for this channel
      * (email address, phone number, device token, etc.) or has enabled notifications
      * for this specific channel.

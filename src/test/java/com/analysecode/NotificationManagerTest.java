@@ -1,7 +1,7 @@
 package com.analysecode;
 
 import com.analysecode.channel.WhatsAppNotification;
-import com.analysecode.channel.in.CanalNotification;
+import com.analysecode.channel.interfaces.CanalNotification;
 import com.analysecode.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

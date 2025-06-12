@@ -32,11 +32,8 @@ class PushNotificationTest {
         // GIVEN
         User user = new User(null, null, "device_token_123");
         
-        // WHEN
-        boolean canSend = pushNotification.canSend(user);
-        
-        // THEN
-        assertTrue(canSend);
+        // WHEN AND THEN
+        assertTrue(pushNotification.canSend(user));
     }
     
     @Test
@@ -45,11 +42,8 @@ class PushNotificationTest {
         // GIVEN
         User user = new User("test@example.com", "0612345678", null);
         
-        // WHEN
-        boolean canSend = pushNotification.canSend(user);
-        
-        // THEN
-        assertFalse(canSend);
+        // WHEN AND THEN
+        assertFalse(pushNotification.canSend(user));
     }
     
     @Test

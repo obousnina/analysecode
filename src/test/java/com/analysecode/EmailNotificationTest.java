@@ -31,12 +31,9 @@ class EmailNotificationTest {
     void givenUserWithEmail_whenCheckingCanSend_thenReturnsTrue() {
         // GIVEN
         User user = new User("test@example.com", null, null);
-        
-        // WHEN
-        boolean canSend = emailNotification.canSend(user);
-        
-        // THEN
-        assertTrue(canSend);
+
+        // WHEN AND THEN
+        assertTrue(emailNotification.canSend(user));
     }
     
     @Test
@@ -45,11 +42,8 @@ class EmailNotificationTest {
         // GIVEN
         User user = new User(null, "0612345678", null);
         
-        // WHEN
-        boolean canSend = emailNotification.canSend(user);
-        
-        // THEN
-        assertFalse(canSend);
+        // WHEN AND THEN
+        assertFalse(emailNotification.canSend(user));
     }
     
     @Test

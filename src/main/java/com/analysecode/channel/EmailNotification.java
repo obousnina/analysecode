@@ -1,7 +1,7 @@
 package com.analysecode.channel;
 
 
-import com.analysecode.channel.in.CanalNotification;
+import com.analysecode.channel.interfaces.CanalNotification;
 import com.analysecode.model.User;
 
 public class EmailNotification implements CanalNotification {

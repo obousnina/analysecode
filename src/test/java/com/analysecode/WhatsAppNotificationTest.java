@@ -33,11 +33,8 @@ class WhatsAppNotificationTest {
         User user = new User();
         user.setWhatsAppId("whatsapp_user_123");
         
-        // WHEN
-        boolean canSend = whatsAppNotification.canSend(user);
-        
-        // THEN
-        assertTrue(canSend);
+        // WHEN AND THEN
+        assertTrue(whatsAppNotification.canSend(user));
     }
     
     @Test
@@ -46,11 +43,8 @@ class WhatsAppNotificationTest {
         // GIVEN
         User user = new User("test@example.com", "0612345678", "device123");
         
-        // WHEN
-        boolean canSend = whatsAppNotification.canSend(user);
-        
-        // THEN
-        assertFalse(canSend);
+        // WHEN AND THEN
+        assertFalse(whatsAppNotification.canSend(user));
     }
     
     @Test
